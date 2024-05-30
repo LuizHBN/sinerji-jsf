@@ -1,5 +1,6 @@
-package br.com.sinerji.controller.user;
+package br.com.sinerji.controller;
 
+import br.com.sinerji.model.pet.Pet;
 import br.com.sinerji.model.user.User;
 import br.com.sinerji.model.user.UserDTO;
 import br.com.sinerji.service.UserService;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet("/user")
 public class UserServlet extends HttpServlet {
@@ -31,7 +33,8 @@ public class UserServlet extends HttpServlet {
         if (idParam != null && !idParam.isEmpty()) {
             processGetRequest(idParam, resp);
         } else {
-            sendErrorResponse(resp, "Parâmetro 'id' não encontrado", HttpServletResponse.SC_BAD_REQUEST);
+            List<User> users = userService.findAllUsers();
+            sendJsonResponse(resp, users);
         }
     }
 
@@ -81,6 +84,12 @@ public class UserServlet extends HttpServlet {
         resp.setContentType("application/json");
         resp.setCharacterEncoding("UTF-8");
         resp.getWriter().write(new Gson().toJson(user));
+        resp.setStatus(HttpServletResponse.SC_OK);
+    }
+    private void sendJsonResponse(HttpServletResponse resp, List<User> users) throws IOException {
+        resp.setContentType("application/json");
+        resp.setCharacterEncoding("UTF-8");
+        resp.getWriter().write(new Gson().toJson(users));
         resp.setStatus(HttpServletResponse.SC_OK);
     }
 

@@ -1,5 +1,6 @@
 package br.com.sinerji.service;
 
+import br.com.sinerji.model.pet.Pet;
 import br.com.sinerji.model.user.User;
 import br.com.sinerji.model.user.UserDTO;
 
@@ -10,6 +11,7 @@ import javax.transaction.Transactional;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.List;
 
 @Stateless
 public class UserService {
@@ -23,6 +25,10 @@ public class UserService {
             throw new EntityNotFoundException("Usuário não encontrado para o ID: " + id);
         }
         return user;
+    }
+    public List<User> findAllUsers() {
+        TypedQuery<User> query = entityManager.createQuery("SELECT u FROM User u", User.class);
+        return query.getResultList();
     }
 
     @Transactional
