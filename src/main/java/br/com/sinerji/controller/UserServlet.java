@@ -1,13 +1,12 @@
 package br.com.sinerji.controller;
 
-import br.com.sinerji.model.pet.Pet;
+
 import br.com.sinerji.model.user.User;
 import br.com.sinerji.model.user.UserDTO;
 import br.com.sinerji.service.UserService;
 import com.google.gson.Gson;
 
 import javax.ejb.EJB;
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -22,12 +21,12 @@ public class UserServlet extends HttpServlet {
     private UserService userService;
 
     @Override
-    public void init() throws ServletException {
+    public void init()  {
         userService = new UserService();
     }
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws  IOException {
         String idParam = req.getParameter("id");
 
         if (idParam != null && !idParam.isEmpty()) {
@@ -60,12 +59,12 @@ public class UserServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws  IOException {
         processPostPutDeleteRequest(req, resp, "atualizar", userService::updateUser, HttpServletResponse.SC_OK);
     }
 
     @Override
-    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws  IOException {
         processPostPutDeleteRequest(req, resp, "excluir", userService::deleteUser, HttpServletResponse.SC_OK);
     }
 

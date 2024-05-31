@@ -7,7 +7,6 @@ import br.com.sinerji.service.PetService;
 import com.google.gson.Gson;
 
 import javax.ejb.EJB;
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -21,7 +20,7 @@ public class PetServlet extends HttpServlet {
     private PetService petService;
 
     @Override
-    public void init() throws ServletException {
+    public void init()  {
         petService = new PetService();
     }
 
@@ -59,12 +58,12 @@ public class PetServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         processPostPutDeleteRequest(req, resp, "atualizar", petService::updatePet, HttpServletResponse.SC_OK);
     }
 
     @Override
-    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         processPostPutDeleteRequest(req, resp, "excluir", petService::deletePet, HttpServletResponse.SC_OK);
     }
 

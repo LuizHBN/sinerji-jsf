@@ -1,1 +1,188 @@
+README - API Sinerji
+Bem-vindo à documentação da API Sinerji.
+ Esta API foi desenvolvida para fornecer funcionalidades relacionadas a usuários, endereços e animais de estimação (pets). Ela permite operações básicas de CRUD (Criar, Ler, Atualizar, Excluir) para cada uma dessas entidades.
 
+##Informações técnicas
+A aplicação está configurada para banco de dados PostgreSQL, certifique-se de configurar o banco de dados antes de rodar a api.
+As configurações de endereço de banco de dados, usuário e senha estão no arquivo Persistence.XML
+As tabelas são mapeadas e geradas no banco de dados automaticamente após a primeira vez que a aplicação rodar no ambiente.
+Modificações de estrutura das entidades também seram mapeadas automaticamente ao banco.
+A porta padrão da aplicação é 8080
+Sua arquitetura envolve o usa da aplicação com páginas JSF porém aind estão em desenvolvimento.
+
+##Teste de aplicação
+A API possui um diretório de testes em que todas as funções principais da categoria "Service" de todas as entidades são testadas.
+Recomendo a execução de todos os testes.
+
+## Endpoints
+
+A API Sinerji oferece os seguintes endpoints:
+
+### Usuários (/user)
+
+- **GET /user**: Retorna todos os usuários cadastrados.
+- **GET /user?id={id}**: Retorna um usuário específico com o ID fornecido.
+- **POST /user**: Adiciona um novo usuário.
+- **PUT /user**: Atualiza um usuário existente.
+- **DELETE /user**: Exclui um usuário existente.
+
+### Endereços (/address)
+
+- **GET /address**: Retorna todos os endereços cadastrados.
+- **GET /address?id={id}**: Retorna um endereço específico com o ID fornecido.
+- **POST /address**: Adiciona um novo endereço.
+- **PUT /address**: Atualiza um endereço existente.
+- **DELETE /address**: Exclui um endereço existente.
+
+### Pets (/pet)
+
+- **GET /pet**: Retorna todos os pets cadastrados.
+- **GET /pet?id={id}**: Retorna um pet específico com o ID fornecido.
+- **POST /pet**: Adiciona um novo pet.
+- **PUT /pet**: Atualiza um pet existente.
+- **DELETE /pet**: Exclui um pet existente.
+
+## Parâmetros
+
+- **id**: O ID do usuário, endereço ou pet desejado para operações de busca, atualização ou exclusão.
+
+## Corpo da Requisição
+
+- **POST /user**:
+{
+  "id": 4,
+  "name": "Janiany",
+  "age": 22,
+  "phone": "11954178260",
+  "gender": "FEMALE"
+}
+
+- **POST /address**:
+{
+  "street": "123 Main Street",
+  "state": "California",
+  "city": "Los Angeles",
+  "number": "456",
+  "additional": "Apartment 789",
+  "zipCode": "90001",
+  "country": "USA"
+}
+
+- **POST /pet**:
+{
+  "type": "DOG",
+  "name": "Latido",
+  "birthDate": "2020-01-15T00:00:00Z",
+  "ownerId": 4,
+  "additionalInformation": "Saudável"
+}
+
+## Respostas
+
+- **GET /user**:
+[{
+        "id": 4,
+        "name": "Janiany",
+        "age": 22,
+        "phone": "11954178260",
+        "gender": "FEMALE"
+    },
+    {
+        "id": 5,
+        "name": "Jeferson",
+        "age": 69,
+        "phone": "11991275193",
+        "gender": "MALE"
+    }
+]
+
+- **GET /address**:
+[
+    {
+        "id": 2,
+        "user": {
+            "id": 4,
+            "name": "Janiany",
+            "age": 22,
+            "phone": "11954178260",
+            "gender": "FEMALE"
+        },
+        "street": "123 Main Street",
+        "state": "California",
+        "city": "Los Angeles",
+        "number": "456",
+        "additional": "Apartment 789",
+        "zipCode": "90001",
+        "country": "USA"
+    },
+    {
+        "id": 3,
+        "user": {
+            "id": 5,
+            "name": "Jeferson",
+            "age": 69,
+            "phone": "11991275193",
+            "gender": "MALE"
+        },
+        "city": "São Bernardo",
+        "number": "45",
+        "additional": "Apartamento 124",
+        "country": "Brasil"
+    }
+]
+
+- **GET /pet**:
+[
+{
+        "id": 4,
+        "type": "CAT",
+        "name": "Miado",
+        "birthDate": "Dec 24, 2022, 9:00:00 PM",
+        "owner": {
+            "id": 8,
+            "name": "John Doe",
+            "age": 25,
+            "phone": "123456789",
+            "gender": "MALE"
+        },
+        "additionalInformation": "Animal com problema de locomoção"
+    },
+    {
+        "id": 5,
+        "type": "DOG",
+        "name": "Latido",
+        "birthDate": "Jun 10, 2020, 9:00:00 PM",
+        "owner": {
+            "id": 4,
+            "name": "Janiany",
+            "age": 22,
+            "phone": "11954178260",
+            "gender": "FEMALE"
+        },
+        "additionalInformation": "Saudável"
+    }
+]
+
+## Dados do Projeto
+
+- **Java Version**: Java 8
+- **Servlet API Version**: 4.0.1
+- **CDI API Version**: 2.0.SP1
+- **Jakarta Persistence API Version**: 3.1.0
+- **Hibernate Core Version**: 5.6.15.Final
+- **Hibernate Entity Manager Version**: 5.3.6.Final
+- **PostgreSQL Driver Version**: 42.6.2
+- **Java EE API Version**: 7.0
+- **Gson Version**: 2.10.1
+- **JUnit Version**: 3.8.1
+- **JUnit Jupiter API Version**: 5.10.2
+- **Mockito Core Version**: 5.7.0
+
+
+## Autor
+
+Esta API foi desenvolvida por [Luiz Henrique Netto](https://www.linkedin.com/in/luiz-henrique-netto-5b852923a/).
+
+## Contato
+
+Para mais informações, entre em contato através do email: lh.netto11@gmail.com

@@ -5,7 +5,6 @@ import br.com.sinerji.model.address.AddressDTO;
 import br.com.sinerji.service.AddressService;
 import com.google.gson.Gson;
 import javax.ejb.EJB;
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -20,7 +19,7 @@ public class AddressServlet extends HttpServlet {
     private AddressService addressService;
 
     @Override
-    public void init() throws ServletException {
+    public void init()  {
         addressService = new AddressService();
     }
 
@@ -58,12 +57,12 @@ public class AddressServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         processPostPutDeleteRequest(req, resp, "atualizar", addressService::updateAddress, HttpServletResponse.SC_OK);
     }
 
     @Override
-    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         processPostPutDeleteRequest(req, resp, "excluir", addressService::deleteAddress, HttpServletResponse.SC_OK);
     }
 
@@ -96,8 +95,6 @@ public class AddressServlet extends HttpServlet {
         resp.setStatus(statusCode);
     }
 
-    public void setAddressService(AddressService mockAddressService) {
-    }
 
     @FunctionalInterface
     interface ActionFunction {
